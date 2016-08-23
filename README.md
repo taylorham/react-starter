@@ -1,15 +1,8 @@
 React Starter
 ==
+This is the base config that all of our React components should use. Examples exist for stateful and stateless components, and everything is commented heavily to provide plenty of guidance.
 
-Create from scratch with these commands in the terminal:
-
-```
-npm init
-npm install --save react react-dom babel webpack webpack-dev-server
-npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
-```
-
-## Getting started
+## Getting up and running
 
 To use this project as a starting point, simply run `npm install` in your terminal.
 
@@ -31,17 +24,28 @@ After installation simply run `npm start` in the terminal while in the cloned re
 This is the component that renders all other components. Any newly created components should reside in the `components/` folder and added to the top of Main.js with:
 
 ```javascript
-var ComponentName = require('../app/components/ComponentName');
+// stateful
+import ComponentName from './ComponentName'
+
+// stateless, or non-default export
+import { OtherComponent } from './OtherComponent'
+
+// import multiple...
+import React, { Component, PropType } from 'react'
 ```
 
-They then have to be included in the `render: function()` for the Main component, eg:
+They then have to be included in the `render()` method for the Main component, eg:
 
 ```javascript
 <ComponentName props={someProps} />
 ```
 
-Make sure any component you wish to use in another file is `export`ed from the file it resides in with this code at the bottom of the file:
+Make sure any component you wish to use in another file is `export`ed from the file it resides in with this code at the declaration of the component:
 
 ```javascript
-module.exports = ComponentName;
+// stateful, optional default
+export /* default */ class ComponentName extends React.Component {...}
+
+// stateless
+export const OtherComponent = ({ firstProp, secondProp }) = {...}
 ```
