@@ -20,7 +20,7 @@ This will install the following dependencies:
   * React (JSX) Presets
   * ES7 Presets ([stage-0](http://babeljs.io/docs/plugins/preset-stage-0/))
 
-After installation simply run `npm start` in the terminal while in the cloned repository's directory and navigate to `localhost:3333/public` in a browser to see the results.
+After installation simply run `npm start` in the terminal and navigate to `localhost:3333/public` in a browser to see the results.
 
 ### Main.js - the heart and brain
 This component should hold all state and state updating functions for your application. It will be your base of operations and the file that uses ReactDOM to actually render your application to the page.
