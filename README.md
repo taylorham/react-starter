@@ -22,7 +22,7 @@ This will install the following dependencies:
 
 After installation simply run `npm start` in the terminal while in the cloned repository's directory and navigate to `localhost:3333/public` in a browser to see the results.
 
-### Main.js
+### Main.js - the heart and brain
 This component should hold all state and state updating functions for your application. It will be your base of operations and the file that uses ReactDOM to actually render your application to the page.
 
 Without an architecture library like Flux or Redux to lend a helping hand, keeping all state in your Main component will save you from a number of headaches down the line. You'll be forced to pass state (and state-modifying methods) through a number of child components to get data/function where it needs to be, but this will safeguard you from unexpected errors when updating state from a child component. Instead of the child setting its own state and passing the result back up the node tree, we have the child calling the Main component's setState and we maintain the unidirectional flow of data from the top-down.
@@ -75,7 +75,7 @@ render() {
 
 ## JSX Gotchas
 ### Single parent element rule
-JSX does not allow the return of multiple sibling elements, requiring any adjacent elements be contained within one wrapping parent.
+JSX does not allow the return of multiple sibling elements in `render`, requiring any adjacent elements be contained within one wrapping parent.
 ```javascript
 // BAD!
 return (
@@ -100,6 +100,22 @@ Since 'class' is a reserved word in JavaScript, we must declare 'className' on H
 <CoolComponent class="btn cool-class" />
 
 // GOOD!
+<CoolComponent className="btn cool-class" />
+// - or -
 <CoolComponent className={'btn cool-class'} />
 ```
-###
+### HTML `style` property
+Styles are written in a new JavaScript-based version of CSS, and are all passed as JS Objects. CSS properties are written in camel-case as object keys, and property values are written as Strings in like so:
+```javascript
+// Inline
+<MyComponent style={{marginTop: '10px', border: '1px solid blue', borderBottomRightRadius: '10%'}} />
+
+// As an Object variable
+const myComponentStyle = {
+  marginTop: '10px',
+  border: '1px solid blue',
+  borderBottomRightRadius: '10%'  
+}
+
+<MyComponent style={myComponentStyle} />
+```
