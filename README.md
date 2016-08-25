@@ -74,4 +74,32 @@ render() {
 ```
 
 ## JSX Gotchas
-#### Single
+### Single parent element rule
+JSX does not allow the return of multiple sibling elements, requiring any adjacent elements be contained within one wrapping parent.
+```javascript
+// BAD!
+return (
+  <h1>Heading!</h1>
+  <MyGreatComponent prop={this.prop} />
+  <MyOtherComponent anotherProp={this.anotherProp} />
+)
+
+// GOOD!
+return (
+  <div id="lets-wrap-it-up">
+    <h1>Heading!</h1>
+    <MyGreatComponent prop={this.prop} />
+    <MyOtherComponent anotherProp={this.anotherProp} />
+  </div>
+)
+```
+### CSS class assignments
+Since 'class' is a reserved word in JavaScript, we must declare 'className' on HTML/JSX elements instead.
+```javascript
+// BAD!
+<CoolComponent class="btn cool-class" />
+
+// GOOD!
+<CoolComponent className={'btn cool-class'} />
+```
+###
