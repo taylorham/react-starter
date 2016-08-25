@@ -9,6 +9,10 @@ module.exports = {
     inline: true,
     port: 3333
   },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
+  },
   module: {
     loaders: [
       {

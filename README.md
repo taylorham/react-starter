@@ -9,7 +9,8 @@ To use this project as a starting point, simply run `npm install` in your termin
 This will install the following dependencies:
 
 * React
-* ReactDOM
+  * ReactDOM
+  * Immutability Helpers (Addons-Update)
 * Webpack
 * Webpack Dev Server
 * Babel
@@ -17,35 +18,60 @@ This will install the following dependencies:
   * Babel Loader
   * ES6 Presets
   * React (JSX) Presets
+  * ES7 Presets ([stage-0](http://babeljs.io/docs/plugins/preset-stage-0/))
 
 After installation simply run `npm start` in the terminal while in the cloned repository's directory and navigate to `localhost:3333/public` in a browser to see the results.
 
 ### Main.js
-This is the component that renders all other components. Any newly created components should reside in the `components/` folder and added to the top of Main.js with:
+This component should hold all state and state updating functions for your application. It will be your base of operations and the file that uses ReactDOM to actually render your application to the page.
+
+Without an architecture library like Flux or Redux to lend a helping hand, keeping all state in your Main component will save you from a number of headaches down the line. You'll be forced to pass state (and state-modifying methods) through a number of child components to get data/function where it needs to be, but this will safeguard you from unexpected errors when updating state from a child component. Instead of the child setting its own state and passing the result back up the node tree, we have the child calling the Main component's setState and we maintain the unidirectional flow of data from the top-down.
+
+It also makes your app completely declarative, in that you'll be able to control and know exactly how your app will look when it renders given a certain current state.
+
+## Creating components
+### Exporting
+Any newly created components should reside in the `components/` folder, named with capitalized camel-case (eg: `ComponentName.js`), and must be `export`ed from the file it resides in with this code at the declaration of the component like so:
 
 ```javascript
-// stateful
+// stateful, class-based component, optional `default`
+export /* default */ class ComponentName extends React.Component {...}
+
+// stateless functional component
+export const OtherComponent = ({ firstProp, secondProp }) = {...}
+```
+
+> The only difference in `export` and `export default` in Class components is the way you'll declare that component when you want to import it...
+
+### Importing
+Before a component can be used in another file it must be imported there. This differs depending on how the component was exported from its original file:
+
+```javascript
+// `export default`
 import ComponentName from './ComponentName'
 
-// stateless, or non-default export
+// `export` (no default)
 import { OtherComponent } from './OtherComponent'
+```
 
+For more information on importing files, [see the MDN docs here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
+
+You can also make multiple imports of multiple types from a single file. This is useful anytime you find yourself using the `Component.SubComponent` syntax often, for example with React.Component or React.Proptypes. To import the default React along with Component and Proptypes (or any other non-default exports) as their own named variables, use the following:
+
+```javascript
 // import multiple...
 import React, { Component, PropType } from 'react'
 ```
 
-They then have to be included in the `render()` method for the Main component, eg:
-
+### Including components in render
+To use a component, use the JSX syntax to declare it the same way you would an HTML element:
 ```javascript
-<ComponentName props={someProps} />
+render() {
+  return (
+    <ComponentName someProp={prop1} anotherProp={prop2} />
+  )
+}
 ```
 
-Make sure any component you wish to use in another file is `export`ed from the file it resides in with this code at the declaration of the component:
-
-```javascript
-// stateful, optional default
-export /* default */ class ComponentName extends React.Component {...}
-
-// stateless
-export const OtherComponent = ({ firstProp, secondProp }) = {...}
-```
+## JSX Gotchas
+#### Single
