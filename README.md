@@ -102,7 +102,7 @@ const DumbComponent = ({ first, last }) = {
 ```
 
 ### Exporting
-Any newly created components should reside in the `components/` folder, named with capitalized camel-case (PascalCase, eg: `ComponentName.js`), and must be `export`ed from the file it resides in. To `export` a component, do it inline with the declaration of the component like so:
+Any newly created components should reside in the `components/` folder, named with capitalized camelCase (PascalCase, eg: `ComponentName.js`), and must be `export`ed from the file it resides in. To `export` a component, do it inline with the declaration of the component like so:
 
 ```javascript
 // stateful class-based component, optional `default`
