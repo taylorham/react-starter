@@ -2,6 +2,7 @@
 This is the base config that all of our React components should use. Examples exist for stateful and stateless components, and everything is commented heavily to provide plenty of guidance.
 
 #### Table of Contents:
+* [Getting up and running](#getting-up-and-running)
 * [Main.js - the heart and brain](#mainjs)
 * [Creating components](#creating-components)
   * [Stateful vs Stateless components](#stateful-vs-stateless)
