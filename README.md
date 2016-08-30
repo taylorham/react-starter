@@ -1,7 +1,7 @@
 # React Starter
 This is the base config that all of our React components should use. Examples exist for stateful and stateless components, and everything is commented heavily to provide plenty of guidance.
 
-#### Table of Contents:
+### Table of Contents:
 * [Getting up and running](#getting-up-and-running)
 * [Main.js - the heart and brain](#mainjs)
 * [Creating components](#creating-components)
@@ -94,7 +94,7 @@ Functional components are a lot less boilerplate to set up, and they don't have 
 ```javascript
 function DumbComponent({ first, last }) = {
   const fullName = `${first} ${last}`
-  
+
   return (
     <div>Hello {fullName}!</div>
   )
@@ -148,7 +148,7 @@ render() {
 ```
 
 ## JSX Gotchas
-#### Single parent element rule
+### Single parent element rule
 JSX does not allow the return of multiple sibling elements in `render`, requiring any adjacent elements be contained within one wrapping parent.
 
 ```javascript
@@ -169,7 +169,7 @@ return (
 )
 ```
 
-#### CSS class assignments
+### CSS class assignments
 Since 'class' is a reserved word in JavaScript, we must declare 'className' on HTML/JSX elements instead.
 
 ```javascript
@@ -182,7 +182,7 @@ Since 'class' is a reserved word in JavaScript, we must declare 'className' on H
 <CoolComponent className={'btn cool-class'} />
 ```
 
-#### <a name="html-style-property"></a>HTML `style` property
+### <a name="html-style-property"></a>HTML `style` property
 Styles are written in a new JavaScript-based version of CSS, and are all passed as JS Objects. CSS properties are written in camel-case as object keys, and property values are written as Strings like so:
 
 ```javascript
@@ -199,13 +199,13 @@ const myComponentStyle = {
 <MyComponent style={myComponentStyle} />
 ```
 
-#### Self-closing tags
+### Self-closing tags
 JSX requires that all self-closing tags be 'closed' (eg: `<TagName />`), and stylistically you should always place a space before the closing `/`.
 
 ```html
 <!-- DOESN'T WORK! -->        <!-- GOOD! -->
-<img src="...">               <img src="..." />
 <br>                          <br />
+<img src="...">               <img src="..." />
 <input type="text">           <input type="text" />
 ```
 
@@ -219,7 +219,7 @@ In addition, always use the self-closing syntax for any JSX elements that don't 
 <MyComponent prop1={someProp} />
 ```
 
-#### Comments in JSX
+### Comments in JSX
 Comments in JSX must be wrapped with `{/* ... */}` inside of a JSX block.
 
 ```javascript
@@ -231,8 +231,9 @@ function CommentExample({ someProp }) = {
   return (
     <div>
       {/* Within a JSX block use curly braces to wrap the comment. */}
-      {/* JSX comments always use
-        the multi-line syntax */
+      {
+        /* JSX comments always use
+          the multi-line syntax */
       }
     </div>
   )
