@@ -89,10 +89,10 @@ class ButtonExample extends React.Component {
 ```
 
 ### <a name="stateless-component"></a>Stateless ("dumb"/presentational component)
-Functional components are a lot less boilerplate to set up, and they don't have their own *state* or lifecycle methods. They rely solely on *props* passed to them from other components in order to access data or functions from those parent components. They are considered to be 'pure' because they simply take in props and spit out some HTML. The props this component receives can also be declared (with fancy ES6 destructuring) in the arguments of the function, offering a much shorter syntax: `name` vs `this.props.name`
+Functional components are a lot less boilerplate to set up and they don't have their own state or lifecycle methods. They rely solely on **props** passed to them from other components in order to access data or functions from those parent components. They are considered to be 'pure' because they simply take in props and spit out some HTML. The props this component receives can also be declared (with fancy ES6 destructuring) in the arguments of the function, offering a much shorter syntax within the component: `name` vs `this.props.name`
 
 ```javascript
-function DumbComponent({ first, last }) = {
+const DumbComponent = ({ first, last }) = {
   const fullName = `${first} ${last}`
 
   return (
@@ -105,16 +105,16 @@ function DumbComponent({ first, last }) = {
 Any newly created components should reside in the `components/` folder, named with capitalized camel-case (PascalCase, eg: `ComponentName.js`), and must be `export`ed from the file it resides in. To `export` a component, do it inline with the declaration of the component like so:
 
 ```javascript
-// stateful, class-based component, optional `default`
+// stateful class-based component, optional `default`
 export /* default */ class ComponentName extends React.Component {...}
 
-// stateless functional component, optional `default`, props declared as arguments
-export /* default */ function OtherComponent({ firstProp, secondProp }) = {...}
+// stateless functional component, props declared as arguments
+export const OtherComponent = ({ firstProp, secondProp }) = {...}
 ```
 
-> There are two main differences to take note of with `export` and `export default`:
->* Only one `default` can be exported per file, and it will be `import`ed without curly braces
->* Any number of non-default exports are allowed per file, and will be `import`ed with curly braces
+There are two main differences to take note of with `export` and `export default`:
+* Only one `default` can be exported per file, and it will be `import`ed without curly braces
+* Any number of non-default exports are allowed per file, and will be `import`ed with curly braces
 
 ### Importing
 Before a component can be used in another file it must be imported there. This differs depending on how the component was exported from its original file:
@@ -183,7 +183,7 @@ Since 'class' is a reserved word in JavaScript, we must declare 'className' on H
 ```
 
 ### <a name="html-style-property"></a>HTML `style` property
-Styles are written in a new JavaScript-based version of CSS, and are all passed as JS Objects. CSS properties are written in camel-case as object keys, and property values are written as Strings like so:
+Styles are written in a new JavaScript-based version of CSS, and are all passed as JS Objects. CSS properties are written in camelCase as object keys, and property values are written as Strings like so:
 
 ```javascript
 // Inline
@@ -200,7 +200,7 @@ const myComponentStyle = {
 ```
 
 ### Self-closing tags
-JSX requires that all self-closing tags be 'closed' (eg: `<TagName />`), and stylistically you should always place a space before the closing `/`.
+JSX requires that all self-closing tags be explicitly closed (eg: `<TagName />`), and stylistically you should always place a space before the closing `/`.
 
 ```html
 <!-- DOESN'T WORK! -->        <!-- GOOD! -->
@@ -220,20 +220,21 @@ In addition, always use the self-closing syntax for any JSX elements that don't 
 ```
 
 ### Comments in JSX
-Comments in JSX must be wrapped with `{/* ... */}` inside of a JSX block.
+Comments in JSX use the same syntax as CSS/JavaScript, but must be wrapped with `{ }` inside of a JSX block.
 
 ```javascript
-function CommentExample({ someProp }) = {
+const CommentExample = ({ someProp }) = {
   // Outside of a JSX block, you can use the typical JavaScript comment syntax.
   /* Multiple lines also
     work the same way */
 
   return (
+    // JSX block begins on next line...
     <div>
       {/* Within a JSX block use curly braces to wrap the comment. */}
       {
-        /* JSX comments always use
-          the multi-line syntax */
+        // Single line syntax only works if the comment is
+        // on a different line from the closing brace `}`
       }
     </div>
   )
