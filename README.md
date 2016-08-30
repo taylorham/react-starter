@@ -58,7 +58,7 @@ React makes a distinction between components that store **state** and those that
 
 Keeping in mind the above advice from the *Thinking in React* docs, the best practice for an app is to be built primarily from stateless components which all rely on one (or very few) stateful component(s) for data.
 
-#### <a name="stateful-component"></a>Stateful ("smart" component)
+### <a name="stateful-component"></a>Stateful ("smart" component)
 Class-based components are capable of storing state, and have access to lifecycle methods such as `ComponentDidMount()` or `ComponentShouldUpdate()` that allow you to run functions during a specific part of the update process (before or after `render()`). They have a `constructor()` function for binding methods to the component, and for calling `super()` to instantiate `this`.
 
 ```javascript
@@ -88,13 +88,15 @@ class ButtonExample extends React.Component {
 }
 ```
 
-#### <a name="stateless-component"></a>Stateless ("dumb"/presentational component)
+### <a name="stateless-component"></a>Stateless ("dumb"/presentational component)
 Functional components are a lot less boilerplate to set up, and they don't have their own *state* or lifecycle methods. They rely solely on *props* passed to them from other components in order to access data or functions from those parent components. They are considered to be 'pure' because they simply take in props and spit out some HTML. The props this component receives can also be declared (with fancy ES6 destructuring) in the arguments of the function, offering a much shorter syntax: `name` vs `this.props.name`
 
 ```javascript
-function DumbComponent({ name }) = {
+function DumbComponent({ first, last }) = {
+  const fullName = `${first} ${last}`
+  
   return (
-    <div>Hello {name}!</div>
+    <div>Hello {fullName}!</div>
   )
 }
 ```
