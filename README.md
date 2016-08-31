@@ -41,7 +41,7 @@ After installation run `npm start` in the terminal and navigate to `localhost:33
 ## <a name="mainjs"></a>Main.js - the heart and brain
 This component should hold most, if not *all*, **state** and **state updating functions** for your application. It will be your base of operations and the file that uses ReactDOM to actually render your application to the page.
 
-Without an architecture library like Flux or Redux to lend a helping hand, keeping all state in your Main component will save you from a number of headaches down the line. You'll be forced to pass state (and state-modifying methods) through a number of child components to get data/function where it needs to be, but this will safeguard you from unexpected errors when updating state from a child component. Instead of the child setting its own state and passing the result back up the node tree, we have the child calling the Main component's setState and we maintain the unidirectional flow of data from the top-down.
+Without an architecture library like Flux or Redux to lend a helping hand, keeping all state in your Main component will save you from a number of headaches down the line. You'll be forced to pass state (and state-modifying methods) through a number of child components to get data/function where it needs to be, but this will safeguard you from unexpected errors when updating state from a child component. Instead of the child setting its own state (which causes a re-render) and passing the result back up the node tree to set state on the parent (causing another re-render), we have the child calling the Main component's `setState` and we maintain the unidirectional flow of data from the top-down.
 
 From Facebook's *Thinking in React* docs:
 >Remember: React is all about one-way data flow down the component hierarchy. It may not be immediately clear which component should own what state. **This is often the most challenging part for newcomers to understand**, so follow these steps to figure it out:
@@ -54,7 +54,7 @@ From Facebook's *Thinking in React* docs:
 
 ## Creating components
 ### <a name="stateful-vs-stateless"></a>Stateful (Class-based, "smart") vs Stateless (functional, "dumb") components
-React makes a distinction between components that store **state** and those that don't. State refers to all of the values in your component or module, such as whether a checkbox is checked, the name someone typed into the 'firstName' field, whether a modal is displayed, or the list of items in a todo list. State is stored as a simple Object on stateful components.
+React makes a distinction between components that store **state** and those that don't. State refers to all of the values in your component or module, such as whether a checkbox is checked, the name someone typed into the 'firstName' field, whether a modal is displayed, or the list of items in a todo list. State is stored as an Object (`state = {key: 'value', ...}`) on stateful components.
 
 Keeping in mind the above advice from the *Thinking in React* docs, the best practice for an app is to be built primarily from stateless components which all rely on one (or very few) stateful component(s) for data.
 
@@ -170,7 +170,7 @@ return (
 ```
 
 ### CSS class assignments
-Since 'class' is a reserved word in JavaScript, we must declare 'className' on HTML/JSX elements instead.
+Since `class` is a reserved word in JavaScript, we must declare `className` on HTML/JSX elements instead.
 
 ```javascript
 // BAD!
@@ -178,8 +178,11 @@ Since 'class' is a reserved word in JavaScript, we must declare 'className' on H
 
 // GOOD!
 <CoolComponent className="btn cool-class" />
+
 // - or -
-<CoolComponent className={'btn cool-class'} />
+const coolComponentClass = 'btn cool-class'
+
+<CoolComponent className={coolComponentClass} />
 ```
 
 ### <a name="html-style-property"></a>HTML `style` property
