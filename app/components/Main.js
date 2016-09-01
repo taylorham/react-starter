@@ -4,9 +4,9 @@ import React from 'react'
 // We're using ReactDOM to manage the rendering of our app (only necessary in this component).
 import ReactDOM from 'react-dom'
 
-// Any components you wish to use in this file must be imported at the top of the document.
-// If the component is not the 'default' export from its file, you have to wrap the
-// component name in curly braces for proper import.
+/* Any components you wish to use in this file must be imported at the top of the document.
+If the component is not the 'default' export from its file, you have to wrap the
+component name in curly braces for proper import. */
 import { HelloMessage } from './StatelessComponent'
 import Field from './StatefulComponent'
 
@@ -17,8 +17,10 @@ class Main extends React.Component {
     // This function must return no more than 1 root node (with unlimited children).
     return (
       <div>
-        {/* Components are included in the page by typing them as though they were
-          a custom HMTL element and can be passed properties in the same way. */}
+        {
+           /* Components are included in the page by typing them as though they were
+           a custom HMTL element and can be passed properties in the same way. */
+        }
         <HelloMessage name="World" />
         <Field />
       </div>
@@ -26,7 +28,7 @@ class Main extends React.Component {
   }
 }
 
-// The 'Main' class takes care of rendering our entire app. We use ReactDOM to manage this.
-// In the ReactDOM.render() function, we must specify the React component we wish to render
-// as well as the DOM node it will inhabit in our 'public/index.html' file.
+/* The 'Main' class takes care of rendering our entire app. We use ReactDOM to manage this.
+In the ReactDOM.render() function, we must specify the React component we wish to render
+as well as the DOM node it will inhabit in our 'public/index.html' file. */
 ReactDOM.render(<Main />, document.getElementById('app'))
