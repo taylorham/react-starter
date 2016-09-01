@@ -1,17 +1,17 @@
-var webpack = require('webpack');
+var webpack = require('webpack')
 
 module.exports = {
-  entry: "./app/components/Main.js",
+  entry: './app/components/Main.js',
   output: {
-    filename: "public/index.js"
+    filename: 'public/index.js'
   },
   devServer: {
     inline: true,
     port: 3333
   },
   externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
+    'react': 'React',
+    'react-dom': 'ReactDOM'
   },
   module: {
     loaders: [
