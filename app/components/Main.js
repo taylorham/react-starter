@@ -7,8 +7,8 @@ import ReactDOM from 'react-dom'
 /* Any components you wish to use in this file must be imported at the top of the document.
 If the component is not the 'default' export from its file, you have to wrap the
 component name in curly braces for proper import. */
-import { HelloMessage } from './StatelessComponent'
-import Field from './StatefulComponent'
+import { DumbComponent } from './DumbComponent'
+import SmartComponent from './SmartComponent'
 
 // Define a STATEFUL React component with the 'class' declaration..
 class Main extends React.Component {
@@ -21,8 +21,8 @@ class Main extends React.Component {
            /* Components are included in the page by typing them as though they were
            a custom HMTL element and can be passed properties in the same way. */
         }
-        <HelloMessage name="World" />
-        <Field />
+        <DumbComponent name="World" />
+        <SmartComponent />
       </div>
     )
   }

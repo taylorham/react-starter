@@ -9,10 +9,10 @@ module.exports = {
     inline: true,
     port: 3333
   },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM'
-  },
+  // externals: {
+  //   'react': 'React',
+  //   'react-dom': 'ReactDOM'
+  // },
   module: {
     loaders: [
       {
@@ -20,8 +20,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          plugins: ['transform-runtime', 'transform-class-properties', 'transform-es2015-destructuring', 'transform-object-rest-spread'],
-          presets: ['es2015', 'react']
+          plugins: ['transform-class-properties', 'transform-object-rest-spread'],
+          presets: ['latest', 'react']
         }
       }
     ]

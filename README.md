@@ -3,7 +3,8 @@ This is the base config that all of our React components should use. Examples ex
 
 ### Table of Contents:
 * [Getting up and running](#getting-up-and-running)
-* [Main.js - the heart and brain](#mainjs)
+* [What should I do first?](#what-should-i-do-first)
+* [Main.js - the skeleton and brain](#mainjs)
 * [Creating components](#creating-components)
   * [Stateful vs Stateless components](#stateful-vs-stateless)
   * [Stateful ("smart" component)](#stateful-component)
@@ -19,7 +20,6 @@ This is the base config that all of our React components should use. Examples ex
   * [Comments in JSX](#comments-in-jsx)
 
 ## Getting up and running
-
 To use this project as a starting point, clone it and run `npm install` in your terminal.
 
 This will install the following dependencies:
@@ -28,22 +28,57 @@ This will install the following dependencies:
   * ReactDOM
   * Immutability Helpers (Addons-Update)
 * Webpack
-* Webpack Dev Server
+  * Webpack Dev Server
 * Babel
-  * Babel Core
-  * Babel Loader
-  * ES6 Presets
+  * Latest ES* Presets (includes ES2015, ES2016, and ES2017)
   * React (JSX) Presets
-  * ES7 Presets ([stage-0](http://babeljs.io/docs/plugins/preset-stage-0/))
+  * Experimental Presets ([stage-0](http://babeljs.io/docs/plugins/preset-stage-0/))
 
 After installation run `npm start` in the terminal and navigate to `localhost:3333/public` in a browser to see the results.
 
-## <a name="mainjs"></a>Main.js - the heart and brain
+## What should I do first?
+Read this README in its entirety, and then check out [Facebook's *Thinking in React* docs](https://facebook.github.io/react/docs/thinking-in-react.html) to make sure you've got a good idea of why you're using React in the first place.
+
+You can start coding by replacing the HTML in the provided DumbComponent's `return (...)` with the HTML from a page you've already made or worked on. Make sure to change all instances of `class=` with `className=`, save your file and your browser will automatically update. Ta-da! You've just made a React component! It's not very good yet, but it's a start.
+
+Now begin trying to break down your page into smaller parts of repeated or reusable elements. Do you have a table with lots of `<tr>`s showing off some data? That's a good candidate for a component! A twitter widget that you want to display on every page? Exactly. Your own custom `<Bold />` component for bolding text? No. You're getting out of hand.
+
+You may find it useful to break the layout of your page into it's own (or a few) component that acts as a container for your more specialized components. It is recommended to keep this layout file as close to the top of your app's component hierarchy as possible to avoid headaches trying to pass data and function from one component to the next. A good practice is to make your `Main.js` file the one that is responsible for most of the layout, for example:
+
+```javascript
+...
+import { Navbar } from './Navbar'
+import { Sidebar } from './Sidebar'
+import { PageBody } from './PageBody'
+import { Footer } from './Footer'
+
+class Main extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <Navbar />
+        <div className="row">
+          <div className="col-md-4"
+            <Sidebar />
+          </div>
+          <div className="col-md-8">
+            <PageBody />
+          </div>
+        </div><!-- /row -->
+        <Footer />
+      </div><!-- /container -->
+    )
+  }
+}
+...
+```
+
+## <a name="mainjs"></a>Main.js - the skeleton and brain
 This component should hold most, if not *all*, **state** and **state updating functions** for your application. It will be your base of operations and the file that uses ReactDOM to actually render your application to the page.
 
 Without an architecture library like Flux or Redux to lend a helping hand, keeping all state in your Main component will save you from a number of headaches down the line. You'll be forced to pass state (and state-modifying methods) through a number of child components to get data/function where it needs to be, but this will safeguard you from unexpected errors when updating state from a child component. Instead of the child setting its own state (which causes a re-render) and passing the result back up the node tree to set state on the parent (causing another re-render), we have the child calling the Main component's `setState` and we maintain the unidirectional flow of data from the top-down.
 
-From Facebook's *Thinking in React* docs:
+From [Facebook's *Thinking in React* docs](https://facebook.github.io/react/docs/thinking-in-react.html):
 >Remember: React is all about one-way data flow down the component hierarchy. It may not be immediately clear which component should own what state. **This is often the most challenging part for newcomers to understand**, so follow these steps to figure it out:
 >
 >For each piece of state in your application:

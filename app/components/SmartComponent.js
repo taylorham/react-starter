@@ -3,7 +3,7 @@ import React from 'react'
 /* All STATEFUL components must be constructed with 'extends React.Component' syntax.
 To make the component available to import into other files, we export at its definition.
 If it is the only component we're exporting from the file we export it with the flag 'default'. */
-export default class Field extends React.Component {
+export default class SmartComponent extends React.Component {
   /* To have access to 'state' in this component, we must define a constructor function
   which can optionally take an argument of any 'props' provided to the component.
   This component will have ownership of properties, and will store them in its 'state'.
